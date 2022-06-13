@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/anime/listar">&#129488;</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								Menu de Cadastro
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="/anime/formulario">Cadastrar Novos Personagens</a></li>
+								<li><a class="dropdown-item" href="/anime/listar">Listar Os Personagens</a></li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<li><a class="dropdown-item" href="#">Something else here</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+</head>
+
+<body>
+
+	<form action="/anime/salvar" method="POST" th:object="${anime}" enctype="multipart/form-data">
+
+		<div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(mensagem)}">
+			<span th:text="${mensagem}"> </span>
+
+		</div>
+
+
+		<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+
+			<div th:each="detailedError : ${#fields.detailedErrors()}">
+				<span th:text="${detailedError.message}"> </span>
+			</div>
+
+
+		</div>
+
+
+
+
+		<input type="hidden" th:field="*{codigo}">
+		Nome: <input type="text" th:field="*{nome}"> <br>
+		Individualidade: <input type="text" th:field="*{individualidade}"> <br>
+		Fraqueza: <input type="text" th:field="*{fraqueza}"> <br>
+		<input type="submit" value="Salvar Alteração">
+
+		
+
+	</form>
+	<script src="/js/bootstrap.min.js"> </script>
+</body>
+
+</html>
